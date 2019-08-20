@@ -1,0 +1,115 @@
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_mousedb |
++-------------------+
+| CageEarHistory    |
+| CycleAndBW        |
+| EEGinfo           |
+| EstrousCycle      |
+| LoosePatch        |
+| MouseGeneralInfo  |
+| MouseProjectList  |
+| cycleLength       |
++-------------------+
+8 rows in set (0.00 sec)
+
+mysql> DESCRIBE MouseGeneralInfo;
++----------------------+-----------------------------------------------------------------------+------+-----+---------+----------------+
+| Field                | Type                                                                  | Null | Key | Default | Extra          |
++----------------------+-----------------------------------------------------------------------+------+-----+---------+----------------+
+| Mouse_id             | int(11)                                                               | NO   | PRI | NULL    | auto_increment |
+| DOB                  | date                                                                  | NO   |     | NULL    |                |
+| Sex                  | enum('M','F')                                                         | NO   |     | NULL    |                |
+| DOD                  | date                                                                  | YES  |     | NULL    |                |
+| Reason_for_Death     | varchar(45)                                                           | YES  |     | NULL    |                |
+| Treatment            | enum('saline','KA','KA_right','KA_left','saline_right','saline_left') | YES  |     | NULL    |                |
+| Date_of_Treatment    | date                                                                  | YES  |     | NULL    |                |
+| Additional_Treatment | varchar(45)                                                           | YES  |     | NULL    |                |
+| Date_add_Treatment   | date                                                                  | YES  |     | NULL    |                |
+| genotype             | enum('Cre+','Cre-','C57')                                             | YES  |     | NULL    |                |
++----------------------+-----------------------------------------------------------------------+------+-----+---------+----------------+
+10 rows in set (0.00 sec)
+
+
+mysql> DESCRIBE CageEarHistory;
++------------+---------------------------------------------------------+------+-----+---------+-------+
+| Field      | Type                                                    | Null | Key | Default | Extra |
++------------+---------------------------------------------------------+------+-----+---------+-------+
+| Mouse_id   | int(11)                                                 | NO   | PRI | NULL    |       |
+| StartTime  | date                                                    | YES  |     | NULL    |       |
+| EndTime    | date                                                    | YES  |     | NULL    |       |
+| CageNumber | decimal(6,2)                                            | NO   | PRI | NULL    |       |
+| EarTag     | enum('N','L','R','L+R','2L','2R','2L+R','L+2R','2L+2R') | NO   | PRI | NULL    |       |
++------------+---------------------------------------------------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> DESCRIBE CycleAndBW;
++-------------------+---------------------------------------+------+-----+---------+-------+
+| Field             | Type                                  | Null | Key | Default | Extra |
++-------------------+---------------------------------------+------+-----+---------+-------+
+| Mouse_id          | int(11)                               | NO   | PRI | NULL    |       |
+| CycleDate         | date                                  | NO   | PRI | NULL    |       |
+| CycleStage        | enum('P','E','M','D','FEW','NO DATA') | YES  |     | NULL    |       |
+| ImageAvailability | enum('TRUE','FALSE')                  | YES  |     | NULL    |       |
+| BodyWeight        | decimal(3,1)                          | YES  |     | NULL    |       |
++-------------------+---------------------------------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+mysql> DESCRIBE EEGinfo;
++---------------+---------------+------+-----+---------+-------+
+| Field         | Type          | Null | Key | Default | Extra |
++---------------+---------------+------+-----+---------+-------+
+| Mouse_id      | int(11)       | NO   | PRI | NULL    |       |
+| Date_of_Start | date          | NO   | PRI | NULL    |       |
+| Date_of_End   | date          | YES  |     | NULL    |       |
+| Channel       | int(11)       | YES  |     | NULL    |       |
+| Computer      | enum('1','2') | YES  |     | NULL    |       |
++---------------+---------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> DESCRIBE EstrousCycle;
++------------+---------------------------------------+------+-----+---------+-------+
+| Field      | Type                                  | Null | Key | Default | Extra |
++------------+---------------------------------------+------+-----+---------+-------+
+| Mouse_id   | int(11)                               | NO   | PRI | NULL    |       |
+| CycleDate  | date                                  | NO   | PRI | NULL    |       |
+| CycleStage | enum('P','E','M','D','FEW','NO DATA') | YES  |     | NULL    |       |
++------------+---------------------------------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> DESCRIBE LoosePatch;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| Mouse_id        | int(11)      | NO   | PRI | NULL    |       |
+| FileName        | varchar(45)  | NO   | PRI | NULL    |       |
+| RecDuration_min | int(11)      | YES  |     | NULL    |       |
+| RecDate         | date         | YES  |     | NULL    |       |
+| FiringRate      | decimal(2,0) | YES  |     | NULL    |       |
+| RawFilePath     | varchar(45)  | YES  |     | NULL    |       |
+| SpikeFilePath   | varchar(45)  | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> DESCRIBE MouseProjectList;
++----------+---------------------------------------+------+-----+------------+-------+
+| Field    | Type                                  | Null | Key | Default    | Extra |
++----------+---------------------------------------+------+-----+------------+-------+
+| Mouse_id | int(11)                               | NO   | PRI | NULL       |       |
+| Exp_time | enum('1 month','2 months','6 months') | YES  |     | NULL       |       |
+| Discard  | enum('True','False')                  | YES  |     | False      |       |
+| Project  | enum('R01','R03')                     | YES  |     | NULL       |       |
+| Status   | enum('Finished','Unfinished')         | YES  |     | Unfinished |       |
++----------+---------------------------------------+------+-----+------------+-------+
+5 rows in set (0.01 sec)
+
+mysql> DESCRIBE cycleLength;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| Mouse_id       | int(11)      | NO   | PRI | NULL    |       |
+| Period         | int(11)      | NO   | PRI | NULL    |       |
+| AveCycleLength | decimal(5,2) | YES  |     | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
